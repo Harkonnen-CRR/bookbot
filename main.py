@@ -1,28 +1,24 @@
+from stats import num_words, num_characters, sort_chars
+
 def get_book_text(filepath):
-    # we need to tell the function how to find and convert the text
     with open (filepath) as f:
-        file_contents = f.read()
-    return file_contents
+        return f.read()
 
-from stats import num_words
-from stats import num_characters
-from stats import sort_chars
-
-file_contents = get_book_text("books/frankenstein.txt")
-
-def main():
-    text = file_contents
+def print_report(filepath):
+    text = get_book_text(filepath)
+    word_count = num_words(text)
     char_counts = num_characters(text)
+    sorted_chars = sort_chars(char_counts)
+
     print("============ BOOKBOT ============")
-    print("Analyzing book found at books/frankenstein.txt...")
+    print(f"Analyzing book found at {filepath}...")
     print("----------- Word Count ----------")
-    print(f"Found {num_words(text)} total words")
+    print(f"Found {word_count} total words")
     print("--------- Character Count -------")
-    counts = num_characters(file_contents)
-    sorted_count = sort_chars(counts)
-    for item in sorted_count:
+    for item in sorted_chars:
         if item["char"].isalpha():
             print(f"{item['char']}: {item['count']}")
     print("============= END ===============")
 
-main()
+if __name__ == '__main__':
+    print_report("books/frankenstein.txt")
