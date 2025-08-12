@@ -12,7 +12,14 @@ def num_characters(text):
             counts[char] = 1
     return counts
 
+def sort_chars(counts):
+    items = []
+    for char, count in counts.items():
+        items.append({"char": char, "count": count})
+    def sort_count(item):
+        return item["count"]
+    items.sort(reverse=True, key=sort_count)
+    return items
+
+
 # Temporary test
-#if __name__ == "__main__":
-    sample = "BookBot!"
-    print(num_characters(sample))
